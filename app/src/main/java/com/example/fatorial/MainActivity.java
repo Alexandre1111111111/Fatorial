@@ -1,12 +1,13 @@
 package com.example.fatorial;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         TextView txt_fatorial = findViewById(R.id.txt_fatorial);
 
@@ -26,28 +27,25 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        btn_fator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_fator.setOnClickListener(view -> {
 
-                if(edt_numftr.getText().toString().isEmpty()) {
-                    Toast.makeText(MainActivity.this,"Insira um valor",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    long ftr = Integer.parseInt(String.valueOf(edt_numftr.getText()));
+                try {
+                long ftr = Integer.parseInt(String.valueOf(edt_numftr.getText()));
 
-                    if (ftr == 1 || ftr == 0) {
-                        txt_result.setText("1");
-                    } else {
-                        long loop = ftr;
-                        long res = 0;
-                        for (int i = 1; i < loop; i++) {
-                            res = ftr *= i;
-                        }
-                        txt_result.setText(String.valueOf(res));
+                if (ftr == 1 || ftr == 0) {
+                    txt_result.setText("1");
+                } else {
+                    long loop = ftr;
+                    long res = 0;
+                    for (int i = 1; i < loop; i++) {
+                        res = ftr *= i;
+                    }
+                    txt_result.setText(String.valueOf(Math.abs(res)));
                     }
                 }
-            }
+                catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this,"Insira um valor",Toast.LENGTH_SHORT).show();
+                }
         });
     }
 }
