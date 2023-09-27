@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 if (ftr == 1 || ftr == 0) {
                     txt_result.setText("1");
                 } else {
-                    long loop = ftr;
+                    final long loop = ftr;
                     long res = 0;
                     for (int i = 1; i < loop; i++) {
                         res = ftr *= i;
